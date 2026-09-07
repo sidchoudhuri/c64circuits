@@ -1,5 +1,3 @@
-https://github.com/user-attachments/assets/8d7f63c4-be1d-4fb9-8e10-171d12c337e8
-
 # C64 Circuits
 A circuit building game in C64 BASIC
 
