@@ -16,6 +16,7 @@ The wire never crosses or touches itself, and every segment connects to the next
 | X | Mark cell as no wire |
 | . | Clear cell |
 | RETURN | Check your circuit |
+| R | Reveal the hidden circuit |
 | I | Instructions |
 | Q | Quit |
 
