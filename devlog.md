@@ -1,0 +1,125 @@
+# C64 Circuits — Devlog
+
+A circuit-building puzzle for the Commodore 64, written in BASIC V2. This is the story of how it went from a one-board proof of concept to a disk with a loader, music and a self-playing demo.
+
+| Version | What it was |
+|---|---|
+| v01 | C64Pipes proof of concept: one board, cell-by-cell check |
+| v02 | Renamed C64 Circuits. Connectivity check, W/A/S/D, X and `.`, mute, reveal |
+| v03 | Chained boards, 32 levels, two-digit clues, final screen |
+| v04 | The disk: loader and menu, SID music, SID detection and volume, demo |
+
+---
+
+## v01: C64Pipes, a proof of concept
+
+The first program was called C64Pipes. A hidden path runs from an edge pad to another edge pad. The game shows how many path pieces are in each row and column, and you build the path with PETSCII straight and corner pieces. It had a blocked-cell marker, boards that grew with each level, and the board was always centred on the screen.
+
+It was then renamed **C64 Circuits**: pieces became wires and the endpoints became pads. Same build, new name.
+
+## v02: A game that lets you be right
+
+The first version generated a hidden path and checked your board against it cell by cell. That sounds fair until you hit a board where two different circuits satisfy every clue. You'd build a perfectly valid one, the game would shout **COUNTS MATCH, PATH WRONG**, and you'd have no idea why.
+
+That message is gone. The check now walks your wire from the entry pad, step by step. It wins when the wire reaches the exit pad and every piece you placed is part of that one connected path. Row and column counts still have to match. Any valid solution is accepted.
+
+Other changes in this round:
+
+- **W/A/S/D** work as well as the cursor keys.
+- **X** and **.** place and clear cells directly.
+- **M** mutes the sound. The SID voices are now switched off after every effect, which kills the faint whine the 6581 chip leaked.
+- **R** reveals the hidden circuit if you're stuck.
+- The screen text is light green on a green board.
+
+## v03: Boards that connect
+
+Until now, solving a level just threw you at a bigger, separate board. That's gone.
+
+Now every solved board stays on screen, recoloured light blue with grey clues, and the next board of the same size starts where the last one ended. They chain together in a snake: left to right across the first row, down, then right to left. When the screen is full of boards, the size steps up and you start a new chain.
+
+Under the hood, the path generator had to change. It used to restart from scratch whenever it painted itself into a corner. It now backtracks and tries another route, which is faster and lets each board begin exactly where the last one ended.
+
+Clues of 10 or more now use two digits, with the tens digit on the row above (for columns) or the column to the left (for rows). That's what makes the big boards possible.
+
+There are 32 levels: ten 5x5 boards, eight 6x6, eight 7x7, three 9x9, then single boards of 12x20, 15x28 and 17x36, which almost fills the screen. Finish the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.`
+
+## v04: From one program to a disk
+
+v03 was a single BASIC program. v04 is a disk of four programs that work together, set up the same way as PETSCII Pit and PETSCII Panic.
+
+### The disk
+
+- `C64CIRCUITS`, the loader and menu, comes first, so `LOAD"*",8` finds it.
+- Under it, five zero-block directory entries draw a pad, a wire that winds down five rows, and a second pad in PETSCII.
+- Then `CIRCUITS` (the game), `CIRCUITSDEMO` and `CIRCUITSMUSIC`.
+- The disk name is `C64 CIRCUITS` and the disk ID is the version.
+
+The art uses the real PETSCII line graphics. The first build used the wrong byte for the vertical line (a right bracket instead of the line character) and it showed up as brackets in the directory. That was fixed and the disk rebuilt.
+
+### Delivery
+
+The programs depend on each other, so they only make sense together. From here on everything ships on the `.d64`; loose `.bas` and `.prg` files are for reading only.
+
+### The loader and menu
+
+The loader sets the top of BASIC memory to $9000 to make room for the music, loads the music, detects SIDs, and shows a menu: **P** play, **D** demo, **I** how to play, **C** credits, **S** SID setup, **Q** quit (with a Y/N check).
+
+The title screen draws a wire growing from pad to pad on the same green dotted board the game uses. The route is different each time.
+
+The SID setup screen shows the detected SIDs and the volumes as bars. Settings live in a page of memory at $9F00 that every program on the disk shares, so choices survive going from the menu to the game and back.
+
+### Music: Pad to Pad
+
+The brief: very simple, electronic-sounding C64 SID music for a game about building circuit boards, with the noise channel used for soldering sounds.
+
+The first tune was rejected as too melodic. The rewrite is a small 6502 IRQ player at $9000 with three voices:
+
+- **Voice 1:** short lead blips with a narrow pulse.
+- **Voice 3:** a square-wave bass.
+- **Voice 2:** the noise channel, playing soldering events: ticks, crackles, and arpeggios that are sometimes long and sometimes short.
+
+It is eight bars in A minor over Am, Am, F, G, Am, Am, F, G. PAL and NTSC get their own frequency tables, and the player compensates so the tempo is the same on both. PAL and NTSC `.sid` files are in `sid/`.
+
+### SID detection and volume
+
+The loader looks for a second SID at $D420. With two SIDs the music plays on the first and the sound effects on the second. **M** and **E** set the music and effects volume in steps, and the music starts at a low setting so effects stay clear. With one SID, **V** sets both, and sound effects borrow voice 2 while they play. SID setup in the menu can force one or two SIDs instead of auto-detecting.
+
+### The game
+
+Mostly the v03 game with the framework around it: it reads the shared settings, starts the music, plays click, tick, buzz and fanfare effects on the effects SID, and Q asks "QUIT TO THE MENU? Y/N" before loading the loader back.
+
+### The demo
+
+The first demo played a single 5x5 board. That wasn't the game, so it was rebuilt: it now plays **stage 1** for real. Ten 5x5 boards fill the screen in the snake layout, a cursor walks each wire and places every piece with the game's sounds, each solved board turns light blue, and the stage starts over at the end.
+
+The boards are pre-generated, the same ten every time, and stored as `DATA` lines in the demo itself. The "CREATING PATH..." message is still shown, with a short pause, but it's for show. An earlier version also scattered X marks over empty cells after each wire, which looked odd and is gone.
+
+### Colour
+
+The instructions screen got colour so keywords pop: the wire is light blue, pads are cyan, numbers, rows, columns and counts are yellow, and every key name is yellow with a green dash and light-green description. The loader's title area now uses the playfield look instead of black.
+
+### Versioning
+
+Versions now count every build, as above. The disk ID, the title screens, the credits and the program headers all say 04.
+
+### Bugs of the week
+
+- **Variables overwriting the program.** The loader is shorter than the game. After loading the game, BASIC kept the loader's end-of-program pointer, so the game's variables and arrays were allocated inside the game's own program text. Line 1440 survived and the header routine at line 1800 was overwritten, which showed up as `?UNDEF'D STATEMENT ERROR IN 1440` right after the music started. The game and demo now reset that pointer from the load address before clearing variables. Panic and Pit's loaders do the same on the way back.
+- **`LOAD"*"` loads the last file, not the first.** The demo's Q key reloaded the demo instead of the menu, because the 1541 treats a bare `*` as the last file accessed. The game and demo now load the loader by name with a wildcard that matches the leading space in its file name.
+- **Q only worked while the cursor moved.** The demo only looked at the keyboard during cursor moves. It now checks in every pause.
+- **Two ACME labels with the same name.** The music player had local labels reused across voices. Each voice routine now has its own scope.
+- **A 40-column line wrapped.** A PRINT of exactly 40 columns adds a blank line on the C64 unless it ends with a semicolon. A few lines were reworked.
+- **A simulation that disagreed with BASIC.** In BASIC, true is -1, not 1. A Python model of the demo's cursor movement used 1 and stepped the wrong way until it was fixed to use BASIC's semantics.
+
+### Under the hood
+
+- The loader is about 150 lines, the game about 220 and the demo about 160, all BASIC V2, with lines kept to 80 characters or fewer.
+- Only the first two characters of a BASIC V2 variable name count, so names were checked for clashes and for keywords hiding inside them.
+- File sizes on the disk: loader 5,405 bytes, game 7,389, demo 5,390, music 1,729.
+- The programs were checked with a line-order and jump-target audit, a tokenizer round trip, a disk read-back and a 6502 simulation of the music player. They have not been run on a real C64 by the person writing this log; playtesting on hardware is up to Sid.
+
+### Next
+
+- A trailer in the style of the PETSCII Pit and Panic trailers.
+- Timing on the 17x36 board is an estimate and needs a real-hardware check.
+- Tweaks to the tune.
