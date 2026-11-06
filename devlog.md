@@ -52,6 +52,7 @@ The demo became a trailer: the same fifteen fixed boards looping until Q, with o
 - **Trailer changes.** No header or status messages (row 0 is the scroller, row 1 is blank), no fake "creating" pause, a little faster solving, and the screen is cleared from row 1 down so the scroller survives each loop. Volume keys still show a short bar on row 1, which clears itself.
 - **Loader.** It now loads the scroller file after the music, using the same "already loaded" check.
 - **Checks.** The scroller was run in a 6502 simulation: the text stream matched the looped text, the fine-scroll values cycled 0 to 7, nothing was written outside screen row 0, colour RAM row 0 and the VIC registers, and stop restored the interrupt vector. It has not been run on a real C64 or emulator.
+- **Menu keys.** The title wire used to freeze the menu for about a second each cycle while it erased and rebuilt itself in one go, so key presses waited. It now erases the old wire two cells at a time and builds the next one a column at a time, checking the keyboard between every step.
 - **Version.** Disk ID and on-screen text are 06. File sizes: loader 5,458 bytes, game 7,599, demo 5,326, music 1,729, scroller 1065.
 
 ## v05: A compact header and fifteen boards
