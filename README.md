@@ -25,7 +25,7 @@ Solving a board doesn't throw you at a new screen. The solved board stays, turns
 | 6 | 15x28 | 1 |
 | 7 | 17x36 | 1 |
 
-That is 37 levels, shown as stage-board: `LVL 1-1` to `LVL 1-15`, then `LVL 2-1` and so on. Clear the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.` Press a key to start again, or Q for the menu.
+That is 37 levels, shown as stage-board: `LVL 1-1` to `LVL 1-15`, then `LVL 2-1` and so on. Clear the last one and the screen becomes a C64 boot screen: `**** COMMODORE 64 BASIC V2 ****`, `READY.` and a blinking cursor. Press any key for the menu.
 
 ## What is on the disk
 
@@ -83,6 +83,8 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 - **Any valid solution wins.** A connectivity check instead of a comparison with the hidden path.
 - **Backtracking path generator.** Each board starts exactly where the last one ended, and the generator backs up and tries another route instead of starting over.
 - **Compact header.** Two rows at the top: `C64 CIRCUITS     LVL 1-10   GRID 5X5`, then a hint on the left and a short status (`PAD TO PAD`, `COUNTS OFF: 2`, `NOT CONNECTED`, `CIRCUIT DONE!`) on the right. The hint changes with what is under the cursor and rotates through the keys while you think. A blank row separates the header from the boards. The demo shows `V:VOLUME Q:QUIT TO MENU` and `DEMO: <status>` instead.
+- **Chips on the big boards.** Stages 5 to 7 have chips on the board that the wire has to route around: 4164 RAM and a 6526 CIA (stage 5), KERNAL, BASIC and the PLA (stage 6), and the 6510 CPU, CHARGEN and both CIAs (stage 7). They are drawn with hardware sprites (reused shapes, stretched) with the part number written on top. The cursor skips over them.
+- **Ending.** Clear the last board and the screen turns into a C64 boot screen, `READY.` and a blinking cursor.
 - **Big boards.** Clues of 10 or more use two digits, with the tens digit above (columns) or to the left (rows). The biggest board is 17x36.
 - **SID music.** "Pad to Pad", a simple electronic tune in A minor, with the noise channel used for soldering sounds: sometimes a long arpeggio, sometimes a short one.
 - **Two SIDs.** The loader detects a second SID. With two, the music plays on the first and the sound effects on the second, with separate music and effects volume (M and E). With one, V sets both. S in the menu lets you override detection.
@@ -105,6 +107,6 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 
 ## Version
 
-This is v06. The disk ID is the version.
+This is v07. The disk ID is the version.
 
 Companion to C64Doku and C64Sweeper.

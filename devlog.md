@@ -43,6 +43,17 @@ Clues of 10 or more now use two digits, with the tens digit on the row above (fo
 
 There are 32 levels: ten 5x5 boards, eight 6x6, eight 7x7, three 9x9, then single boards of 12x20, 15x28 and 17x36, which almost fills the screen. Finish the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.`
 
+## v07: Chips and a boot screen
+
+The final stages became a C64 motherboard to debug: the wire has to be routed around real chips.
+
+- **Chips.** Stage 5 (12x20): 4164 RAM and a 6526 CIA at the bottom left. Stage 6 (15x28): KERNAL, BASIC and the PLA. Stage 7 (17x36): the 6510 CPU in the middle, CHARGEN and both CIAs. Positions follow where the parts roughly sit on a breadbin board.
+- **How they work.** A chip is a 3-row block of cells the wire cannot use. The generator treats them as walls (and re-applies them every time it restarts), the board draw and the reveal skip them, and the cursor jumps over them. Clues count wire cells only, so the rules and the check are unchanged. A Python copy of the generator found a route every time in 300 runs per stage, in a median of 32 to 64 steps.
+- **Sprites.** The chip bodies are hardware sprites (X-expanded, dark pins top and bottom, a notch at the left end) built from three shapes stored in the cassette buffer at $0340. A 12-cell chip is two sprites side by side. Sprites sit behind the characters, so the part numbers are plain text on top. They are switched off for the help screen and when leaving for the menu, and on again after a redraw.
+- **Ending.** The old "MAIN GRID: ONLINE" text became a C64 boot screen: blue screen, light-blue border, the BASIC V2 banner, 38911 bytes free, `READY.` and a blinking cursor. Any key returns to the menu.
+- **Not yet.** The special tiles for stages 1 to 3 (power in, RF modulator, VIC-II can) and the two-SID stage 4 are planned for v08 and v09, so the level count is still 37.
+- **Version.** Disk ID and on-screen text are 07. The game is 9,668 bytes; roughly 4 KB of BASIC memory stays free. Nothing has been run on a real C64 or emulator, including the sprite positions.
+
 ## v06: The trailer
 
 The demo became a trailer: the same fifteen fixed boards looping until Q, with one scroller on the top row. It replaces `CIRCUITSDEMO` on the disk, so the menu entry and Q-to-menu behaviour are unchanged.
