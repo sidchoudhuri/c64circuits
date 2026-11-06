@@ -22,7 +22,7 @@ Solving a board doesn't throw you at a new screen. The solved board stays, turns
 | 1 | 5x5 | 15 |
 | 2 | 6x6 | 8 |
 | 3 | 7x7 | 8 |
-| 4 | 9x9 | 3 |
+| 4 | 9x9, 9x12, 9x9 | 3 |
 | 5 | 12x20 | 1 |
 | 6 | 15x28 | 1 |
 | 7 | 17x36 | 1 |
@@ -40,6 +40,10 @@ One slot in each of the first three stages is not a puzzle but a part of the mot
 | 3 | `VIC` VIC-II, the shielded can | middle left |
 
 They are on the screen from the start as a dark gray box labelled `OFF`, with no clues. When the wire reaches one, a fanfare plays and it lights up with its wire, clues and a new label (`ON`, `MOD`, `6567`), and the chain carries on from its other side. They are not counted as levels, and the level numbers skip them. Stage 4 (two SID chips with a wider board between them) is planned.
+
+### Stage 4: the two SIDs
+
+Stage 4 is three boards in a row: a 9x9 board with a 6581 SID chip, a wider 9x12 board, and a second 9x9 board with the other SID. The wire you build runs across all three, so it is the jumper between the two SIDs, like a dual-SID setup. The chips are sprites that start dark and go live when their board is solved, and the wire routes around them.
 
 ## What is on the disk
 
@@ -99,6 +103,7 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 - **Backtracking path generator.** Each board starts exactly where the last one ended, and the generator backs up and tries another route instead of starting over.
 - **Compact header.** Two rows at the top: `C64 CIRCUITS     LVL 1-10   GRID 5X5`, then a hint on the left and a short status (`PAD TO PAD`, `COUNTS OFF: 2`, `NOT CONNECTED`, `CIRCUIT DONE!`) on the right. The hint changes with what is under the cursor and rotates through the keys while you think. A blank row separates the header from the boards. The trailer has no header text: the scroller takes the top row.
 - **Chips on the big boards.** Stages 5 to 7 have chips on the board that the wire has to route around: 4164 RAM and a 6526 CIA (stage 5), KERNAL, BASIC and the PLA (stage 6), and the 6510 CPU, CHARGEN and both CIAs (stage 7). They are drawn with hardware sprites (reused shapes, stretched) with the part number written on top, and the cursor skips over them. Until the board is solved they look dead: dark gray with thin legs and a dim label. Solve the board and they come alive with bright legs, a light gray body and a black label.
+- **Stage 4.** Three boards of different widths with a SID chip on each outer board.
 - **Special tiles.** Power in, the RF modulator and the VIC-II sit on the first three stages as dark boxes that light up when the chain reaches them.
 - **Ending.** Clear the last board and the screen turns into a C64 boot screen, `READY.` and a blinking cursor.
 - **Big boards.** Clues of 10 or more use two digits, with the tens digit above (columns) or to the left (rows). The biggest board is 17x36.
@@ -125,6 +130,6 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 
 ## Version
 
-This is v08b. The disk ID is the version (08).
+This is v09. The disk ID is the version (09).
 
 Companion to C64Doku and C64Sweeper.

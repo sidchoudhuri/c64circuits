@@ -178,3 +178,10 @@ Versions now count every build, as above. The disk ID, the title screens, the cr
 - The trailer (disk file `CIRCUITSDEMO`) plays stage 1 including the power tile, with a fine-scrolling story along the top row from `CIRCUITSSCROLL` at $9700.
 - Not done yet: stage 4 with two SIDs and a 12-column middle board (v09), and the standalone trailer package for itch.io.
 - None of this has been run on real hardware or an emulator by me. Checks so far are listing audits and logic checks in Python and cbmbasic.
+
+## v09 - the SID boards (stage 4)
+- **Stage 4 is finished.** Three boards in a row: 9x9, a wider 9x12 middle board, and 9x9. A 6581 SID chip sits on each outer board, and the wire you build across all three is the jumper between the two SIDs.
+- **Boards of different widths.** Each board in a stage can now have its own width. Positions, clues, the generator, the check and the redraw all follow the current board's width, and the three boards fill the 40 columns exactly (12 + 16 + 12).
+- **Chips per board.** Each chip belongs to one board, so stage 4 draws a chip only once its board is reached, and a chip stays lit once its board is solved while the next board is still dark.
+- Checked the generator over 500 chained runs in Python (no restarts, paths always connect across the chain) and ran the real BASIC generator in cbmbasic: each board starts where the last one ended and the chips are routed around. Not run on a real C64 or in an emulator by me.
+- Disk ID and loader version 09.
