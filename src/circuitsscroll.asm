@@ -1,4 +1,3 @@
-```asm
 ; C64 CIRCUITS trailer scroller: fine-scrolling text on screen row 0, raster split
 !cpu 6502
 * = $9700
@@ -185,4 +184,3 @@ text
 !byte 8,5,32,13,5,14,21,32,46,46,46,32,32,32,32,32
 !byte 32
 !byte 0
-```
