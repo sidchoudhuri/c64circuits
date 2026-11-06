@@ -161,3 +161,10 @@ Versions now count every build, as above. The disk ID, the title screens, the cr
 - A trailer in the style of the PETSCII Pit and Panic trailers.
 - Timing on the 17x36 board is an estimate and needs a real-hardware check.
 - Tweaks to the tune.
+
+## v08 - special tiles (stages 1 to 3)
+- **Power-in, RF modulator, VIC-II.** Stage 1 tile 5 (top right), stage 2 tile 1 (top left) and stage 3 tile 8 (middle left) are now pre-solved panels: the wire is already laid, the board starts dark (`OFF`), then a fanfare lights it (`ON`, `MOD`, `6567`). They link the neighbouring boards and are not counted as playable levels.
+- **Level count is now 34**: 14 + 7 + 7 + 3 + 1 + 1 + 1. Numbering skips the special tile.
+- **Demo = level 1.** The trailer uses the same special-tile code, so it plays the power tile exactly as the game does.
+- Stage 4 (two SIDs with a 12-column middle board) is still planned for v09.
+- Disk ID and loader version bumped to 08. Untested on hardware; logic checked in cbmbasic/Python only.

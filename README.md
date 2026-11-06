@@ -25,7 +25,7 @@ Solving a board doesn't throw you at a new screen. The solved board stays, turns
 | 6 | 15x28 | 1 |
 | 7 | 17x36 | 1 |
 
-That is 37 levels, shown as stage-board: `LVL 1-1` to `LVL 1-15`, then `LVL 2-1` and so on. Clear the last one and the screen becomes a C64 boot screen: `**** COMMODORE 64 BASIC V2 ****`, `READY.` and a blinking cursor. Press any key for the menu.
+That is 34 levels (14 + 7 + 7 + 3 + 1 + 1 + 1: the power-in, RF modulator and VIC-II tiles are pre-solved set pieces that light up with a fanfare), shown as stage-board: `LVL 1-1` to `LVL 1-15`, then `LVL 2-1` and so on. Clear the last one and the screen becomes a C64 boot screen: `**** COMMODORE 64 BASIC V2 ****`, `READY.` and a blinking cursor. Press any key for the menu.
 
 ## What is on the disk
 
