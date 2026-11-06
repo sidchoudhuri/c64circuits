@@ -172,3 +172,9 @@ Versions now count every build, as above. The disk ID, the title screens, the cr
 ## v08b - dark special tiles, live chips
 - Special tiles (stages 1-3) are drawn at the start of the stage as a dark gray box with black `PWR`/`OFF` (`RF`/`OFF`, `VIC`/`OFF`), no clues. On their turn the fanfare plays and the box lights up with its wire, clues and `ON`/`MOD`/`6567` label.
 - Chips (stages 5-7) start dark (dark gray, thin legs, dim label). Solving the board switches the sprites to multicolour: bright legs, light gray body, black label.
+
+### Where things stand at v08b
+- 34 levels over seven stages. Stages 1 to 3 each have a pre-solved motherboard tile (power in, RF modulator, VIC-II) that starts dark and lights up when the chain reaches it. Stages 5 to 7 have sprite chips that start dark and come alive when the board is solved.
+- The trailer (disk file `CIRCUITSDEMO`) plays stage 1 including the power tile, with a fine-scrolling story along the top row from `CIRCUITSSCROLL` at $9700.
+- Not done yet: stage 4 with two SIDs and a 12-column middle board (v09), and the standalone trailer package for itch.io.
+- None of this has been run on real hardware or an emulator by me. Checks so far are listing audits and logic checks in Python and cbmbasic.
