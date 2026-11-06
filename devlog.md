@@ -168,3 +168,7 @@ Versions now count every build, as above. The disk ID, the title screens, the cr
 - **Demo = level 1.** The trailer uses the same special-tile code, so it plays the power tile exactly as the game does.
 - Stage 4 (two SIDs with a 12-column middle board) is still planned for v09.
 - Disk ID and loader version bumped to 08. Untested on hardware; logic checked in cbmbasic/Python only.
+
+## v08b - dark special tiles, live chips
+- Special tiles (stages 1-3) are drawn at the start of the stage as a dark gray box with black `PWR`/`OFF` (`RF`/`OFF`, `VIC`/`OFF`), no clues. On their turn the fanfare plays and the box lights up with its wire, clues and `ON`/`MOD`/`6567` label.
+- Chips (stages 5-7) start dark (dark gray, thin legs, dim label). Solving the board switches the sprites to multicolour: bright legs, light gray body, black label.
