@@ -66,6 +66,19 @@ LOAD"*",8
 RUN
 ```
 
+## The tools disk
+
+`c64circuits-tools.d64` is a separate disk with one program, `CIRCUITSVIEW`, for looking at the game without playing it. It uses the game's own wire generator and drawing code.
+
+```
+LOAD"*",8
+RUN
+```
+
+- **Level viewer.** Pick a stage with `1` to `7`. `+` and `-` (or cursor up and down) step the wire from empty to solved. `,` and `.` (or cursor left and right) change board, `F` and `E` jump to full or empty, `N` makes a new layout.
+- **Dark and lit.** `L` switches the chips and the PWR, RF and VIC tiles between dark and lit. A finished wire lights them by itself.
+- **Motherboard.** `M` shows every chip laid out like a C64 board, drawn in PETSCII. It starts dark. `L` lights them all, and `0` to `7` lights everything up to that stage.
+
 ## The menu
 
 | Key | Action |
@@ -119,6 +132,8 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 | Path | What it is |
 |---|---|
 | `c64circuits.d64` | The disk |
+| `c64circuits-tools.d64` | The tools disk (level viewer and motherboard) |
+| `src/c64circuits-view.bas` | Tools disk program listing |
 | `src/c64circuits-loader.bas` | Loader and menu listing |
 | `src/c64circuits-game.bas` | Game listing |
 | `src/c64circuits-demo.bas` | Trailer (demo) listing |
