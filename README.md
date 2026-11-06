@@ -94,10 +94,10 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 
 ## Features
 
-- **Pure BASIC V2.** The game, demo and menu are all BASIC. The only machine code is the small music player.
+- **Pure BASIC V2.** The game, demo and menu are all BASIC. The only machine code is the small music player and the text scroller.
 - **Any valid solution wins.** A connectivity check instead of a comparison with the hidden path.
 - **Backtracking path generator.** Each board starts exactly where the last one ended, and the generator backs up and tries another route instead of starting over.
-- **Compact header.** Two rows at the top: `C64 CIRCUITS     LVL 1-10   GRID 5X5`, then a hint on the left and a short status (`PAD TO PAD`, `COUNTS OFF: 2`, `NOT CONNECTED`, `CIRCUIT DONE!`) on the right. The hint changes with what is under the cursor and rotates through the keys while you think. A blank row separates the header from the boards. The demo shows `V:VOLUME Q:QUIT TO MENU` and `DEMO: <status>` instead.
+- **Compact header.** Two rows at the top: `C64 CIRCUITS     LVL 1-10   GRID 5X5`, then a hint on the left and a short status (`PAD TO PAD`, `COUNTS OFF: 2`, `NOT CONNECTED`, `CIRCUIT DONE!`) on the right. The hint changes with what is under the cursor and rotates through the keys while you think. A blank row separates the header from the boards. The trailer has no header text: the scroller takes the top row.
 - **Chips on the big boards.** Stages 5 to 7 have chips on the board that the wire has to route around: 4164 RAM and a 6526 CIA (stage 5), KERNAL, BASIC and the PLA (stage 6), and the 6510 CPU, CHARGEN and both CIAs (stage 7). They are drawn with hardware sprites (reused shapes, stretched) with the part number written on top, and the cursor skips over them. Until the board is solved they look dead: dark gray with thin legs and a dim label. Solve the board and they come alive with bright legs, a light gray body and a black label.
 - **Special tiles.** Power in, the RF modulator and the VIC-II sit on the first three stages as dark boxes that light up when the chain reaches them.
 - **Ending.** Clear the last board and the screen turns into a C64 boot screen, `READY.` and a blinking cursor.
@@ -105,7 +105,7 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 - **SID music.** "Pad to Pad", a simple electronic tune in A minor, with the noise channel used for soldering sounds: sometimes a long arpeggio, sometimes a short one.
 - **Two SIDs.** The loader detects a second SID. With two, the music plays on the first and the sound effects on the second, with separate music and effects volume (M and E). With one, V sets both. S in the menu lets you override detection.
 - **PAL and NTSC.** The music player keeps the same tempo on both.
-- **Self-playing trailer (the demo).** Plays stage 1, all fifteen 5x5 boards, on its own and loops until you press Q: the same fifteen boards every time, solved by a cursor that walks the wire and places each piece with the game's sounds. A fine-scrolling text runs along the top row with the story, the music and the itch.io link. V, or M and E with two SIDs, change the volume. Q returns to the menu.
+- **Self-playing trailer (the demo).** Plays stage 1, all fifteen 5x5 boards, on its own and loops until you press Q: the same fifteen boards every time, including the power tile lighting up, solved by a cursor that walks the wire and places each piece with the game's sounds. A fine-scrolling text runs along the top row with the story, the music and the itch.io link. V, or M and E with two SIDs, change the volume. Q returns to the menu.
 - **Colour.** Green board, yellow clues, cyan pads, light blue solved boards. The instructions screen colours keywords so they stand out.
 - **Sound effects.** Click, tick, buzz and a rising fanfare, all on the SID.
 
