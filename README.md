@@ -17,7 +17,7 @@ Solving a board doesn't throw you at a new screen. The solved board stays, turns
 
 | Stage | Board | Boards in the chain |
 |---|---|---|
-| 1 | 5x5 | 10 |
+| 1 | 5x5 | 15 |
 | 2 | 6x6 | 8 |
 | 3 | 7x7 | 8 |
 | 4 | 9x9 | 3 |
@@ -25,7 +25,7 @@ Solving a board doesn't throw you at a new screen. The solved board stays, turns
 | 6 | 15x28 | 1 |
 | 7 | 17x36 | 1 |
 
-That is 32 levels. Clear the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.` Press a key to start again, or Q for the menu.
+That is 37 levels, shown as stage-board: `LVL 1-1` to `LVL 1-15`, then `LVL 2-1` and so on. Clear the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.` Press a key to start again, or Q for the menu.
 
 ## What is on the disk
 
@@ -82,11 +82,12 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 - **Pure BASIC V2.** The game, demo and menu are all BASIC. The only machine code is the small music player.
 - **Any valid solution wins.** A connectivity check instead of a comparison with the hidden path.
 - **Backtracking path generator.** Each board starts exactly where the last one ended, and the generator backs up and tries another route instead of starting over.
+- **Compact header.** Two rows at the top: `C64 CIRCUITS     LVL 1-10   GRID 5X5`, then a hint on the left and a short status (`PAD TO PAD`, `COUNTS OFF: 2`, `NOT CONNECTED`, `CIRCUIT DONE!`) on the right. The hint changes with what is under the cursor and rotates through the keys while you think. A blank row separates the header from the boards. The demo shows `V:VOLUME Q:QUIT TO MENU` and `DEMO: <status>` instead.
 - **Big boards.** Clues of 10 or more use two digits, with the tens digit above (columns) or to the left (rows). The biggest board is 17x36.
 - **SID music.** "Pad to Pad", a simple electronic tune in A minor, with the noise channel used for soldering sounds: sometimes a long arpeggio, sometimes a short one.
 - **Two SIDs.** The loader detects a second SID. With two, the music plays on the first and the sound effects on the second, with separate music and effects volume (M and E). With one, V sets both. S in the menu lets you override detection.
 - **PAL and NTSC.** The music player keeps the same tempo on both.
-- **Self-playing demo.** Plays stage 1, all ten 5x5 boards, on its own: the same ten boards every time, solved by a cursor that walks the wire and places each piece with the game's sounds. Q returns to the menu.
+- **Self-playing demo.** Plays stage 1, all fifteen 5x5 boards, on its own: the same fifteen boards every time, solved by a cursor that walks the wire and places each piece with the game's sounds. Q returns to the menu.
 - **Colour.** Green board, yellow clues, cyan pads, light blue solved boards. The instructions screen colours keywords so they stand out.
 - **Sound effects.** Click, tick, buzz and a rising fanfare, all on the SID.
 
@@ -104,6 +105,6 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 
 ## Version
 
-This is v04. The disk ID is the version.
+This is v05. The disk ID is the version.
 
 Companion to C64Doku and C64Sweeper.

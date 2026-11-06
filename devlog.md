@@ -43,6 +43,21 @@ Clues of 10 or more now use two digits, with the tens digit on the row above (fo
 
 There are 32 levels: ten 5x5 boards, eight 6x6, eight 7x7, three 9x9, then single boards of 12x20, 15x28 and 17x36, which almost fills the screen. Finish the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.`
 
+## v05: A compact header and fifteen boards
+
+Feedback on the v04 demo: stage 1 stopped at ten boards instead of a snake of three rows (left to right, right to left, left to right) for fifteen, the three-line header ate the screen, and the level counter read `10` instead of a stage and board.
+
+- **Fifteen 5x5 boards.** Stage 1 now fills rows 3 to 24 with a 3-row snake. The ladder is 37 levels.
+- **Level numbering.** `LVL 1-10`, then `LVL 2-1`, with the grid size next to it (`GRID 5X5`, `GRID 12X20`).
+- **Two header rows plus a gap.** Row 0 is title, level and grid. Row 1 is a hint on the left and a short status on the right (15 characters at most). Row 2 is blank, boards start on row 3.
+- **Contextual hints.** The hint follows the cell under the cursor, then rotates through movement, check and help, and quit and volume keys while idle.
+- **Shorter messages.** `NEW BOARD...`, `PAD TO PAD`, `COUNTS OFF: n`, `NOT CONNECTED`, `CIRCUIT DONE!`, `REVEALING...`.
+- **Demo.** Same layout, header `V:VOLUME Q:QUIT TO MENU` with `DEMO: CREATING / SOLVING / CHECKING / SOLVED`, and fifteen stored boards.
+- **Layout detail.** The first board row drops its unused top pad row so the gap fits; a script checked all seven stages for overlaps and off-screen cells.
+- **Version.** Disk ID and on-screen text are 05.
+
+Not run on a real C64 or emulator; hint-printing speed in the idle loop and the memory estimate (roughly 8 KB free) are unchecked. File sizes: loader 5,405 bytes, game 7,599, demo 5,602.
+
 ## v04: From one program to a disk
 
 v03 was a single BASIC program. v04 is a disk of four programs that work together, set up the same way as PETSCII Pit and PETSCII Panic.
