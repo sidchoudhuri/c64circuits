@@ -43,6 +43,17 @@ Clues of 10 or more now use two digits, with the tens digit on the row above (fo
 
 There are 32 levels: ten 5x5 boards, eight 6x6, eight 7x7, three 9x9, then single boards of 12x20, 15x28 and 17x36, which almost fills the screen. Finish the last one and the grid comes online: `MAIN GRID: ONLINE`, `CORE FREQUENCY: 50HZ STABLE`, `GRID SYNCHRONIZED.`
 
+## v06: The trailer
+
+The demo became a trailer: the same fifteen fixed boards looping until Q, with one scroller on the top row. It replaces `CIRCUITSDEMO` on the disk, so the menu entry and Q-to-menu behaviour are unchanged.
+
+- **Scroller.** A new 1,151-byte machine-code file, `CIRCUITSSCROLL`, loaded next to the music at $9700 (source in `src/circuitsscroll.asm`). A raster interrupt sets the horizontal fine scroll just before row 0 and resets it right after, so the text moves one pixel per frame in 38-column mode. Once per 8 pixels the row shifts one character and a new one comes in. The text colours ripple and cycle slowly. BASIC does not touch row 0.
+- **Music.** The scroller's interrupt calls the music's play routine once per frame at a fixed raster line, so the music cannot delay the scroll split. It stops cleanly: Q stops the scroller, then the music.
+- **Trailer changes.** No header or status messages (row 0 is the scroller, row 1 is blank), no fake "creating" pause, a little faster solving, and the screen is cleared from row 1 down so the scroller survives each loop. Volume keys still show a short bar on row 1, which clears itself.
+- **Loader.** It now loads the scroller file after the music, using the same "already loaded" check.
+- **Checks.** The scroller was run in a 6502 simulation: the text stream matched the looped text, the fine-scroll values cycled 0 to 7, nothing was written outside screen row 0, colour RAM row 0 and the VIC registers, and stop restored the interrupt vector. It has not been run on a real C64 or emulator.
+- **Version.** Disk ID and on-screen text are 06. File sizes: loader 5,458 bytes, game 7,599, demo 5,326, music 1,729, scroller 1,151.
+
 ## v05: A compact header and fifteen boards
 
 Feedback on the v04 demo: stage 1 stopped at ten boards instead of a snake of three rows (left to right, right to left, left to right) for fifteen, the three-line header ate the screen, and the level counter read `10` instead of a stage and board.

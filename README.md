@@ -87,7 +87,7 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 - **SID music.** "Pad to Pad", a simple electronic tune in A minor, with the noise channel used for soldering sounds: sometimes a long arpeggio, sometimes a short one.
 - **Two SIDs.** The loader detects a second SID. With two, the music plays on the first and the sound effects on the second, with separate music and effects volume (M and E). With one, V sets both. S in the menu lets you override detection.
 - **PAL and NTSC.** The music player keeps the same tempo on both.
-- **Self-playing demo.** Plays stage 1, all fifteen 5x5 boards, on its own: the same fifteen boards every time, solved by a cursor that walks the wire and places each piece with the game's sounds. Q returns to the menu.
+- **Self-playing trailer (the demo).** Plays stage 1, all fifteen 5x5 boards, on its own and loops until you press Q: the same fifteen boards every time, solved by a cursor that walks the wire and places each piece with the game's sounds. A fine-scrolling text runs along the top row with the story, the music and the itch.io link. V, or M and E with two SIDs, change the volume. Q returns to the menu.
 - **Colour.** Green board, yellow clues, cyan pads, light blue solved boards. The instructions screen colours keywords so they stand out.
 - **Sound effects.** Click, tick, buzz and a rising fanfare, all on the SID.
 
@@ -105,6 +105,6 @@ The check tells you what is wrong: `ROW/COL COUNTS OFF` with how many lines are 
 
 ## Version
 
-This is v05. The disk ID is the version.
+This is v06. The disk ID is the version.
 
 Companion to C64Doku and C64Sweeper.
