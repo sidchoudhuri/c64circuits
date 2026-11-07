@@ -70,6 +70,8 @@ RUN
 
 `c64circuits-tools.d64` is a separate disk with one program, `CIRCUITSVIEW`, for looking at the game without playing it. It uses the game's own wire generator and drawing code.
 
+`CIRCUITSVIEW` is also on the game disk, last in the directory. The loader does not offer it, so load it yourself with `LOAD"CIRCUITSVIEW",8`.
+
 ```
 LOAD"*",8
 RUN
